@@ -27,7 +27,7 @@
             Me.xrLabel1 = New DevExpress.XtraReports.UI.XRLabel()
             Me.TopMargin = New DevExpress.XtraReports.UI.TopMarginBand()
             Me.BottomMargin = New DevExpress.XtraReports.UI.BottomMarginBand()
-            DirectCast(Me, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
             ' 
             ' Detail
             ' 
@@ -65,7 +65,7 @@
             ' 
             Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() { Me.Detail, Me.TopMargin, Me.BottomMargin})
             Me.Version = "14.2"
-            DirectCast(Me, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
 
         End Sub
 

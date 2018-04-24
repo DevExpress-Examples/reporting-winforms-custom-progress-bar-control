@@ -12,7 +12,7 @@ Namespace WindowsFormsApplication1
             InitializeComponent()
         End Sub
 
-        Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+        Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
             ' Create an End-User Designer form.
             Dim designForm As New XRDesignForm()
 
