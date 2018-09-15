@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Drawing;
 using DevExpress.Utils.Design;
+using DevExpress.Utils.Serializing;
 using DevExpress.XtraPrinting;
 using DevExpress.XtraReports;
 using DevExpress.XtraReports.UI;
@@ -12,18 +13,21 @@ using DevExpress.XtraReports.UI;
 namespace WindowsFormsApplication1 {
 // The DefaultBindableProperty attribute is intended to make the Position 
 // property bindable when an item is dropped from the Field List.
-[
-ToolboxItem(true),
-DefaultBindableProperty("Position"),
-ToolboxBitmap24Attribute(@"WindowsFormsApplication1.ProgressBar24x24.png, WindowsFormsApplication11")
-]
+    [
+    ToolboxItem(true),
+    DefaultBindableProperty("Position"),
+    ToolboxBitmap24("WindowsFormsApplication1.ProgressBar24x24.png, WindowsFormsApplication11")
+    ]
     public class ProgressBar : XRControl {
-
         // The current position value.
         private float pos = 0;
 
         // The maximum value for the progress bar position.
         private float maxVal = 100;
+
+        static ProgressBar() {
+            DevExpress.XtraReports.Expressions.ExpressionBindingDescriptor.SetPropertyDescription(typeof(ProgressBar), "Position", new DevExpress.XtraReports.Expressions.ExpressionBindingDescription(new string[] { "BeforePrint" }, 1000, new string[0]));
+        }
 
         public ProgressBar() {
             this.ForeColor = SystemColors.Highlight;
@@ -31,6 +35,7 @@ ToolboxBitmap24Attribute(@"WindowsFormsApplication1.ProgressBar24x24.png, Window
 
         // Define the MaxValue property.
         [DefaultValue(100)]
+        [XtraSerializableProperty]
         public float MaxValue {
             get { return this.maxVal; }
             set {
@@ -41,6 +46,7 @@ ToolboxBitmap24Attribute(@"WindowsFormsApplication1.ProgressBar24x24.png, Window
 
         // Define the Position property. 
         [DefaultValue(0), Bindable(true)]
+        [XtraSerializableProperty]
         public float Position {
             get { return this.pos; }
             set {
