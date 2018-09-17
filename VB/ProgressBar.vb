@@ -2,6 +2,7 @@
 Imports System.ComponentModel
 Imports System.Drawing
 Imports DevExpress.Utils.Design
+Imports DevExpress.Utils.Serializing
 Imports DevExpress.XtraPrinting
 Imports DevExpress.XtraReports
 Imports DevExpress.XtraReports.UI
@@ -12,9 +13,9 @@ Imports DevExpress.XtraReports.UI
 Namespace WindowsFormsApplication1
 ' The DefaultBindableProperty attribute is intended to make the Position 
 ' property bindable when an item is dropped from the Field List.
-<ToolboxItem(True), DefaultBindableProperty("Position"), ToolboxBitmap24Attribute("WindowsFormsApplication1.ProgressBar24x24.png, WindowsFormsApplication11")> _
-Public Class ProgressBar
-    Inherits XRControl
+    <ToolboxItem(True), DefaultBindableProperty("Position"), ToolboxBitmap24("WindowsFormsApplication1.ProgressBar24x24.png, WindowsFormsApplication11")> _
+    Public Class ProgressBar
+        Inherits XRControl
 
         ' The current position value.
         Private pos As Single = 0
@@ -22,12 +23,16 @@ Public Class ProgressBar
         ' The maximum value for the progress bar position.
         Private maxVal As Single = 100
 
+        Shared Sub New()
+            DevExpress.XtraReports.Expressions.ExpressionBindingDescriptor.SetPropertyDescription(GetType(ProgressBar), "Position", New DevExpress.XtraReports.Expressions.ExpressionBindingDescription(New String() { "BeforePrint" }, 1000, New String(){}))
+        End Sub
+
         Public Sub New()
             Me.ForeColor = SystemColors.Highlight
         End Sub
 
         ' Define the MaxValue property.
-        <DefaultValue(100)> _
+        <DefaultValue(100), XtraSerializableProperty> _
         Public Property MaxValue() As Single
             Get
                 Return Me.maxVal
@@ -41,7 +46,7 @@ Public Class ProgressBar
         End Property
 
         ' Define the Position property. 
-        <DefaultValue(0), Bindable(True)> _
+        <DefaultValue(0), Bindable(True), XtraSerializableProperty> _
         Public Property Position() As Single
             Get
                 Return Me.pos
@@ -84,6 +89,6 @@ Public Class ProgressBar
             ' Add the VisualBrick to the panel.
             panel.Bricks.Add(progressBar)
         End Sub
-End Class
+    End Class
 End Namespace
 #End Region ' #Code
