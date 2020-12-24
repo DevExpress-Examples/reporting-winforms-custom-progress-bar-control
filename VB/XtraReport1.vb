@@ -1,16 +1,16 @@
-﻿Imports System
+Imports System
 Imports System.Drawing
 Imports System.Collections
 Imports System.ComponentModel
 Imports DevExpress.XtraReports.UI
 
 Namespace WindowsFormsApplication1
-    Partial Public Class XtraReport1
-        Inherits DevExpress.XtraReports.UI.XtraReport
+	Partial Public Class XtraReport1
+		Inherits DevExpress.XtraReports.UI.XtraReport
 
-        Public Sub New()
-            InitializeComponent()
-        End Sub
+		Public Sub New()
+			InitializeComponent()
+		End Sub
 
-    End Class
+	End Class
 End Namespace
