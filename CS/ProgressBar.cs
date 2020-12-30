@@ -13,19 +13,24 @@ namespace WindowsFormsApplication1 {
         // Implement a static constructor as shown below to add the
         // "Position" property to the property grid's "Expressions" tab.
         static ProgressBar() {
-            // An array of events in which the property should be available.
+            // Specify an array of events in which the property should be available.
             string[] eventNames = new string[] { "BeforePrint" };
 
-            // The property position in the property grid's "Expressions" tab.
-            // 0 - fist, 1000 - last.
+            // Specify the property position in the property grid's "Expressions" tab.
+            // 0 - first, 1000 - last.
             int position = 0;
 
-            // An array of the property's inner properties.
+            // Specify an array of the property's inner properties.
             string[] nestedBindableProperties = null;
 
-            // The property's category in the property grid's "Expressions" tab.
-            // The empty string indicates the root category.
+            // Specify the property's category in the property grid's "Expressions" tab.
+            // The empty string corresponds to the root category.
             string scopeName = "";
+
+            // Create and set a description for the "Position" property.
+            ExpressionBindingDescription description = new ExpressionBindingDescription(
+                eventNames, position, nestedBindableProperties, scopeName
+            );
 
             ExpressionBindingDescriptor.SetPropertyDescription(
                 typeof(ProgressBar),
@@ -73,9 +78,9 @@ namespace WindowsFormsApplication1 {
         }
 
         /*
-        A progress bar can be represented as two bricks. The "PanelBrick" serves as a container,
-        the "VisualBrick" corresponds to a rectangle bar and is stored inside the "PanelBrick"
-        container.
+            You can use two bricks to construct a progress bar. The "VisualBrick"
+            corresponds to a rectangle bar, the "PanelBrick" serves as a container
+            for this bar.
         */
 
         protected override VisualBrick CreateBrick(VisualBrick[] childrenBricks) {

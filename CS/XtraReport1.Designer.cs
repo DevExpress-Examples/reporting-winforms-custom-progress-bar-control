@@ -35,12 +35,12 @@
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode2 = new DevExpress.DataAccess.Json.JsonSchemaNode("Country", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode3 = new DevExpress.DataAccess.Json.JsonSchemaNode("Area", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<double>));
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
+            this.progressBar1 = new WindowsFormsApplication1.ProgressBar();
+            this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrLabel2 = new DevExpress.XtraReports.UI.XRLabel();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.jsonDataSource1 = new DevExpress.DataAccess.Json.JsonDataSource(this.components);
-            this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel2 = new DevExpress.XtraReports.UI.XRLabel();
-            this.progressBar1 = new WindowsFormsApplication1.ProgressBar();
             this.PageHeader = new DevExpress.XtraReports.UI.PageHeaderBand();
             this.xrLabel3 = new DevExpress.XtraReports.UI.XRLabel();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
@@ -56,27 +56,18 @@
             this.Detail.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
             // 
-            // TopMargin
+            // progressBar1
             // 
-            this.TopMargin.Name = "TopMargin";
-            this.TopMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
-            this.TopMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
-            // 
-            // BottomMargin
-            // 
-            this.BottomMargin.Name = "BottomMargin";
-            this.BottomMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
-            this.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
-            // 
-            // jsonDataSource1
-            // 
-            this.jsonDataSource1.ConnectionName = null;
-            customJsonSource1.Json = resources.GetString("customJsonSource1.Json");
-            this.jsonDataSource1.JsonSource = customJsonSource1;
-            this.jsonDataSource1.Name = "jsonDataSource1";
-            jsonSchemaNode1.Nodes.Add(jsonSchemaNode2);
-            jsonSchemaNode1.Nodes.Add(jsonSchemaNode3);
-            this.jsonDataSource1.Schema = jsonSchemaNode1;
+            this.progressBar1.BackColor = System.Drawing.Color.LightBlue;
+            this.progressBar1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Position", "[Area]")});
+            this.progressBar1.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.progressBar1.LocationFloat = new DevExpress.Utils.PointFloat(177.0834F, 3.999996F);
+            this.progressBar1.MaxValue = 17100F;
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Position = 0F;
+            this.progressBar1.SizeF = new System.Drawing.SizeF(362.5F, 33.41665F);
+            this.progressBar1.StylePriority.UseBackColor = false;
             // 
             // xrLabel1
             // 
@@ -108,18 +99,27 @@
             this.xrLabel2.Text = "xrLabel2";
             this.xrLabel2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             // 
-            // progressBar1
+            // TopMargin
             // 
-            this.progressBar1.BackColor = System.Drawing.Color.LightBlue;
-            this.progressBar1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Position", "[Area]")});
-            this.progressBar1.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.progressBar1.LocationFloat = new DevExpress.Utils.PointFloat(177.0834F, 3.999996F);
-            this.progressBar1.MaxValue = 17100F;
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Position = 0F;
-            this.progressBar1.SizeF = new System.Drawing.SizeF(362.5F, 33.41665F);
-            this.progressBar1.StylePriority.UseBackColor = false;
+            this.TopMargin.Name = "TopMargin";
+            this.TopMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
+            this.TopMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
+            // 
+            // BottomMargin
+            // 
+            this.BottomMargin.Name = "BottomMargin";
+            this.BottomMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
+            this.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
+            // 
+            // jsonDataSource1
+            // 
+            this.jsonDataSource1.ConnectionName = null;
+            customJsonSource1.Json = resources.GetString("customJsonSource1.Json");
+            this.jsonDataSource1.JsonSource = customJsonSource1;
+            this.jsonDataSource1.Name = "jsonDataSource1";
+            jsonSchemaNode1.Nodes.Add(jsonSchemaNode2);
+            jsonSchemaNode1.Nodes.Add(jsonSchemaNode3);
+            this.jsonDataSource1.Schema = jsonSchemaNode1;
             // 
             // PageHeader
             // 

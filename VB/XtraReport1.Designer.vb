@@ -30,12 +30,12 @@
 			Dim jsonSchemaNode2 As New DevExpress.DataAccess.Json.JsonSchemaNode("Country", True, DevExpress.DataAccess.Json.JsonNodeType.Property, GetType(String))
 			Dim jsonSchemaNode3 As New DevExpress.DataAccess.Json.JsonSchemaNode("Area", True, DevExpress.DataAccess.Json.JsonNodeType.Property, GetType(Double?))
 			Me.Detail = New DevExpress.XtraReports.UI.DetailBand()
+			Me.progressBar1 = New WindowsFormsApplication1.ProgressBar()
+			Me.xrLabel1 = New DevExpress.XtraReports.UI.XRLabel()
+			Me.xrLabel2 = New DevExpress.XtraReports.UI.XRLabel()
 			Me.TopMargin = New DevExpress.XtraReports.UI.TopMarginBand()
 			Me.BottomMargin = New DevExpress.XtraReports.UI.BottomMarginBand()
 			Me.jsonDataSource1 = New DevExpress.DataAccess.Json.JsonDataSource(Me.components)
-			Me.xrLabel1 = New DevExpress.XtraReports.UI.XRLabel()
-			Me.xrLabel2 = New DevExpress.XtraReports.UI.XRLabel()
-			Me.progressBar1 = New WindowsFormsApplication1.ProgressBar()
 			Me.PageHeader = New DevExpress.XtraReports.UI.PageHeaderBand()
 			Me.xrLabel3 = New DevExpress.XtraReports.UI.XRLabel()
 			DirectCast(Me, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -48,27 +48,17 @@
 			Me.Detail.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F)
 			Me.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
 			' 
-			' TopMargin
+			' progressBar1
 			' 
-			Me.TopMargin.Name = "TopMargin"
-			Me.TopMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F)
-			Me.TopMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
-			' 
-			' BottomMargin
-			' 
-			Me.BottomMargin.Name = "BottomMargin"
-			Me.BottomMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F)
-			Me.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
-			' 
-			' jsonDataSource1
-			' 
-			Me.jsonDataSource1.ConnectionName = Nothing
-			customJsonSource1.Json = resources.GetString("customJsonSource1.Json")
-			Me.jsonDataSource1.JsonSource = customJsonSource1
-			Me.jsonDataSource1.Name = "jsonDataSource1"
-			jsonSchemaNode1.Nodes.Add(jsonSchemaNode2)
-			jsonSchemaNode1.Nodes.Add(jsonSchemaNode3)
-			Me.jsonDataSource1.Schema = jsonSchemaNode1
+			Me.progressBar1.BackColor = System.Drawing.Color.LightBlue
+			Me.progressBar1.ExpressionBindings.AddRange(New DevExpress.XtraReports.UI.ExpressionBinding() { New DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Position", "[Area]")})
+			Me.progressBar1.ForeColor = System.Drawing.SystemColors.Highlight
+			Me.progressBar1.LocationFloat = New DevExpress.Utils.PointFloat(177.0834F, 3.999996F)
+			Me.progressBar1.MaxValue = 17100F
+			Me.progressBar1.Name = "progressBar1"
+			Me.progressBar1.Position = 0F
+			Me.progressBar1.SizeF = New System.Drawing.SizeF(362.5F, 33.41665F)
+			Me.progressBar1.StylePriority.UseBackColor = False
 			' 
 			' xrLabel1
 			' 
@@ -98,17 +88,27 @@
 			Me.xrLabel2.Text = "xrLabel2"
 			Me.xrLabel2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
 			' 
-			' progressBar1
+			' TopMargin
 			' 
-			Me.progressBar1.BackColor = System.Drawing.Color.LightBlue
-			Me.progressBar1.ExpressionBindings.AddRange(New DevExpress.XtraReports.UI.ExpressionBinding() { New DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Position", "[Area]")})
-			Me.progressBar1.ForeColor = System.Drawing.SystemColors.Highlight
-			Me.progressBar1.LocationFloat = New DevExpress.Utils.PointFloat(177.0834F, 3.999996F)
-			Me.progressBar1.MaxValue = 17100F
-			Me.progressBar1.Name = "progressBar1"
-			Me.progressBar1.Position = 0F
-			Me.progressBar1.SizeF = New System.Drawing.SizeF(362.5F, 33.41665F)
-			Me.progressBar1.StylePriority.UseBackColor = False
+			Me.TopMargin.Name = "TopMargin"
+			Me.TopMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F)
+			Me.TopMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+			' 
+			' BottomMargin
+			' 
+			Me.BottomMargin.Name = "BottomMargin"
+			Me.BottomMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F)
+			Me.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+			' 
+			' jsonDataSource1
+			' 
+			Me.jsonDataSource1.ConnectionName = Nothing
+			customJsonSource1.Json = resources.GetString("customJsonSource1.Json")
+			Me.jsonDataSource1.JsonSource = customJsonSource1
+			Me.jsonDataSource1.Name = "jsonDataSource1"
+			jsonSchemaNode1.Nodes.Add(jsonSchemaNode2)
+			jsonSchemaNode1.Nodes.Add(jsonSchemaNode3)
+			Me.jsonDataSource1.Schema = jsonSchemaNode1
 			' 
 			' PageHeader
 			' 

@@ -17,20 +17,23 @@ Namespace WindowsFormsApplication1
 		' Implement a static constructor as shown below to add the
 		' "Position" property to the property grid's "Expressions" tab.
 		Shared Sub New()
-			' An array of events in which the property should be available.
+			' Specify an array of events in which the property should be available.
 			Dim eventNames() As String = { "BeforePrint" }
 
-			' The property position in the property grid's "Expressions" tab.
-			' 0 - fist, 1000 - last.
+			' Specify the property position in the property grid's "Expressions" tab.
+			' 0 - first, 1000 - last.
 'INSTANT VB NOTE: The variable position was renamed since Visual Basic does not handle local variables named the same as class members well:
 			Dim position_Renamed As Integer = 0
 
-			' An array of the property's inner properties.
+			' Specify an array of the property's inner properties.
 			Dim nestedBindableProperties() As String = Nothing
 
-			' The property's category in the property grid's "Expressions" tab.
-			' The empty string indicates the root category.
+			' Specify the property's category in the property grid's "Expressions" tab.
+			' The empty string corresponds to the root category.
 			Dim scopeName As String = ""
+
+			' Create and set a description for the "Position" property.
+			Dim description As New ExpressionBindingDescription(eventNames, position_Renamed, nestedBindableProperties, scopeName)
 
 			ExpressionBindingDescriptor.SetPropertyDescription(GetType(ProgressBar), nameof(Position), New ExpressionBindingDescription(eventNames, position_Renamed, nestedBindableProperties, scopeName))
 		End Sub
@@ -71,9 +74,9 @@ Namespace WindowsFormsApplication1
 		End Property
 
 '        
-'        A progress bar can be represented as two bricks. The "PanelBrick" serves as a container,
-'        the "VisualBrick" corresponds to a rectangle bar and is stored inside the "PanelBrick"
-'        container.
+'            You can use two bricks to construct a progress bar. The "VisualBrick"
+'            corresponds to a rectangle bar, the "PanelBrick" serves as a container
+'            for this bar.
 '        
 
 		Protected Overrides Function CreateBrick(ByVal childrenBricks() As VisualBrick) As VisualBrick
