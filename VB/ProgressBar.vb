@@ -35,7 +35,7 @@ Namespace WindowsFormsApplication1
 			' Create and set a description for the "Position" property.
 			Dim description As New ExpressionBindingDescription(eventNames, position_Renamed, nestedBindableProperties, scopeName)
 
-			ExpressionBindingDescriptor.SetPropertyDescription(GetType(ProgressBar), nameof(Position), New ExpressionBindingDescription(eventNames, position_Renamed, nestedBindableProperties, scopeName))
+			ExpressionBindingDescriptor.SetPropertyDescription(GetType(ProgressBar), nameof(Position), description)
 		End Sub
 
 'INSTANT VB NOTE: The variable position was renamed since Visual Basic does not allow variables and other class members to have the same name:

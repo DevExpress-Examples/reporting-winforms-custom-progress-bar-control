@@ -33,13 +33,7 @@ namespace WindowsFormsApplication1 {
             );
 
             ExpressionBindingDescriptor.SetPropertyDescription(
-                typeof(ProgressBar),
-                nameof(Position),
-                new ExpressionBindingDescription(
-                    eventNames, position,
-                    nestedBindableProperties,
-                    scopeName
-                )
+                typeof(ProgressBar), nameof(Position), description
             );
         }
 
