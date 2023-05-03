@@ -10,8 +10,6 @@
 
 * <a href="https://www.devexpress.com/Support/Center/Example/Details/T209289">ASPxReportDesigner - How to register a custom control in the Designer's toolbox</a>
 * <a href="https://www.devexpress.com/Support/Center/Example/Details/T416384">WPF End-User Report Designer - How to register a custom control in the Designer's toolbox</a>
-* <a href="https://www.devexpress.com/Support/Center/Example/Details/T320738">How to create complex custom controls (XRTreeList and XRGrid)</a></p>
-
 <br/>
 
 
