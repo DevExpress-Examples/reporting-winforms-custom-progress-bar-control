@@ -1,15 +1,25 @@
-<!-- default badges list -->
-[![](https://img.shields.io/badge/Open_in_DevExpress_Support_Center-FF7200?style=flat-square&logo=DevExpress&logoColor=white)](https://supportcenter.devexpress.com/ticket/details/E57)
-[![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
-<!-- default badges end -->
-# How to create custom report controls
+# Reporting for WinForms - Create a Custom Progress Bar Control
+
+This example demonstrates how to create a custom Progress Bar control and use this control to visualize data.
+
+The report that contains the custom Progress Bar control is shown below:
+
+![Custom Progress Bar Control in Report Designer](Images/design-area.png)
+
+The report preview is shown in the following image:
+
+![Custom Progress Bar Control in Preview](Images/screenshot.png)
+
+## Files to Review
+
+- [ProgressBar.cs](CS/ProgressBar.cs) (VB: [ProgressBar.vb](VB/ProgressBar.vb))
+
+## Documentation
+
+- [Create a Custom Control Inherited From XRControl](https://docs.devexpress.com/XtraReports/1304)
+- [Use Custom Controls](https://docs.devexpress.com/XtraReports/2607/detailed-guide-to-devexpress-reporting/use-report-controls/use-custom-controls)
 
 
-<p>This example demonstrates how to create a <a href="https://documentation.devexpress.com/#XtraReports/CustomDocument1304">custom <strong>ProgressBar</strong> control</a>.</p>
-<p>In this example, the progress bar control is implemented as a filled rectangle with variable width, and serves as a graphical representation of a numerical value. This custom control has two primary properties - <strong>Position</strong> and <strong>MaxValue</strong>. The <strong>Position</strong> property determines the current progress for the value tracked by this control (how much of the bar is filled in with the progress color). The <strong>MaxValue</strong> property determines the maximum value for the <strong>Position</strong> property and the scale used by the progress bar. Note that the <strong>Position</strong> property is bindable, which allows the progress bar control to be used in data-aware reports.<br><br><strong>See also</strong>
+## More Examples
 
-* <a href="https://www.devexpress.com/Support/Center/Example/Details/T209289">ASPxReportDesigner - How to register a custom control in the Designer's toolbox</a>
-* <a href="https://www.devexpress.com/Support/Center/Example/Details/T416384">WPF End-User Report Designer - How to register a custom control in the Designer's toolbox</a>
-<br/>
-
-
+- [How to Create a Custom DevExpress Report Control](https://github.com/DevExpress-Examples/Reporting-Custom-Controls)

@@ -1,92 +1,111 @@
-#region #Reference
-using System.ComponentModel;
-using System.Drawing;
-using DevExpress.Utils.Design;
-using DevExpress.Utils.Serializing;
 using DevExpress.XtraPrinting;
 using DevExpress.XtraReports;
 using DevExpress.XtraReports.UI;
-// ...
-#endregion #Reference
+using System.ComponentModel;
+using System.Drawing;
+using DevExpress.Utils.Serializing;
+using DevExpress.XtraReports.Expressions;
 
-#region #Code
 namespace WindowsFormsApplication1 {
-// The DefaultBindableProperty attribute is intended to make the Position 
-// property bindable when an item is dropped from the Field List.
-    [
-    ToolboxItem(true),
-    DefaultBindableProperty("Position"),
-    ToolboxBitmap24("WindowsFormsApplication1.ProgressBar24x24.png, WindowsFormsApplication11")
-    ]
+    [ToolboxItem(true)]
+    [DefaultBindableProperty("Position")]
     public class ProgressBar : XRControl {
-        // The current position value.
-        private float pos = 0;
-
-        // The maximum value for the progress bar position.
-        private float maxVal = 100;
-
+        // Implement a static constructor as shown below to add the
+        // "Position" property to the property grid's "Expressions" tab.
         static ProgressBar() {
-            DevExpress.XtraReports.Expressions.ExpressionBindingDescriptor.SetPropertyDescription(typeof(ProgressBar), "Position", new DevExpress.XtraReports.Expressions.ExpressionBindingDescription(new string[] { "BeforePrint" }, 1000, new string[0]));
+            // Specify an array of events in which the property should be available.
+            string[] eventNames = new string[] { "BeforePrint" };
+
+            // Specify the property position in the property grid's "Expressions" tab.
+            // 0 - first, 1000 - last.
+            int position = 0;
+
+            // Specify an array of the property's inner properties.
+            string[] nestedBindableProperties = null;
+
+            // Specify the property's category in the property grid's "Expressions" tab.
+            // The empty string corresponds to the root category.
+            string scopeName = "";
+
+            // Create and set a description for the "Position" property.
+            ExpressionBindingDescription description = new ExpressionBindingDescription(
+                eventNames, position, nestedBindableProperties, scopeName
+            );
+
+            ExpressionBindingDescriptor.SetPropertyDescription(
+                typeof(ProgressBar), nameof(Position), description
+            );
         }
+
+        private float position = 0;
+        private float maxValue = 100;
 
         public ProgressBar() {
             this.ForeColor = SystemColors.Highlight;
         }
 
-        // Define the MaxValue property.
         [DefaultValue(100)]
+        [Description("The maximum value of the bar position.")]
+        [DisplayName("Max Value")]
+        [Category("Parameters")]
         [XtraSerializableProperty]
         public float MaxValue {
-            get { return this.maxVal; }
+            get { return this.maxValue; }
             set {
                 if (value <= 0) return;
-                this.maxVal = value;
+                this.maxValue = value;
             }
         }
 
-        // Define the Position property. 
-        [DefaultValue(0), Bindable(true)]
+        [DefaultValue(0)]
+        [Description("The current bar position.")]
+        [DisplayName("Position")]
+        [Category("Parameters")]
         [XtraSerializableProperty]
         public float Position {
-            get { return this.pos; }
+            get { return this.position; }
             set {
-                if (value < 0 || value > maxVal)
+                if (value < 0 || value > maxValue)
                     return;
-                this.pos = value;
+                this.position = value;
             }
         }
 
-        // Override the XRControl.CreateBrick method.
+        /*
+            You can use two bricks to construct a progress bar. The "VisualBrick"
+            corresponds to a rectangle bar, the "PanelBrick" serves as a container
+            for this bar.
+        */
+
         protected override VisualBrick CreateBrick(VisualBrick[] childrenBricks) {
-            // Use this code to make the progress bar control 
-            // always represented as a Panel brick.
+            // Create and return a panel brick.
             return new PanelBrick(this);
         }
 
-        // Override the XRControl.PutStateToBrick method.
         protected override void PutStateToBrick(VisualBrick brick, PrintingSystemBase ps) {
-            // Call the PutStateToBrick method of the base class.
             base.PutStateToBrick(brick, ps);
 
-            // Get the Panel brick which represents the current progress bar control.
+            // Cast the "brick" variable to the "PanelBrick" type (the type of a brick
+            // created in the "CreateBrick" method). 
             PanelBrick panel = (PanelBrick)brick;
 
-            // Create a new VisualBrick to be inserted into the panel brick.
+            // Create a new visual brick to represent a bar.
             VisualBrick progressBar = new VisualBrick(this);
 
-            // Hide borders.
+            // Hide the brick's borders.
             progressBar.Sides = BorderSide.None;
 
-            // Set the foreground color to fill the completed area of a progress bar.
+            // Set the foreground color for the bar.
             progressBar.BackColor = panel.Style.ForeColor;
 
-            // Calculate the rectangle to be filled by the foreground color.
-            progressBar.Rect = new RectangleF(0, 0, panel.Rect.Width * (Position / MaxValue),
-                panel.Rect.Height);
+            // Calculate the width of the progress bar's filled area.
+            float filledAreaWidth = panel.Rect.Width * (Position / MaxValue);
 
-            // Add the VisualBrick to the panel.
+            // Create a rectangle to be filled by the foreground color.
+            progressBar.Rect = new RectangleF(0, 0, filledAreaWidth, panel.Rect.Height);
+
+            // Add the visual brick to the panel brick.
             panel.Bricks.Add(progressBar);
         }
     }
 }
-#endregion #Code

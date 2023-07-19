@@ -1,89 +1,113 @@
-'#Region "#Reference"
-Imports System.ComponentModel
-Imports System.Drawing
-Imports DevExpress.Utils.Design
-Imports DevExpress.Utils.Serializing
+#Region "#Reference"
 Imports DevExpress.XtraPrinting
 Imports DevExpress.XtraReports
 Imports DevExpress.XtraReports.UI
+Imports System.ComponentModel
+Imports System.Drawing
+Imports DevExpress.Utils.Serializing
+Imports DevExpress.XtraReports.Expressions
+#End Region ' #Reference
 
-' ...
-'#End Region  ' #Reference
-'#Region "#Code"
+#Region "#Code"
 Namespace WindowsFormsApplication1
+	<ToolboxItem(True), DefaultBindableProperty("Position")>
+	Public Class ProgressBar
+		Inherits XRControl
 
-    ' The DefaultBindableProperty attribute is intended to make the Position 
-    ' property bindable when an item is dropped from the Field List.
-    <ToolboxItem(True), DefaultBindableProperty("Position"), ToolboxBitmap24("WindowsFormsApplication1.ProgressBar24x24.png, WindowsFormsApplication11")>
-    Public Class ProgressBar
-        Inherits XRControl
+		' Implement a static constructor as shown below to add the
+		' "Position" property to the property grid's "Expressions" tab.
+		Shared Sub New()
+			' Specify an array of events in which the property should be available.
+			Dim eventNames() As String = { "BeforePrint" }
 
-        ' The current position value.
-        Private pos As Single = 0
+			' Specify the property position in the property grid's "Expressions" tab.
+			' 0 - first, 1000 - last.
 
-        ' The maximum value for the progress bar position.
-        Private maxVal As Single = 100
+			Dim position_Renamed As Integer = 0
 
-        Shared Sub New()
-            Expressions.ExpressionBindingDescriptor.SetPropertyDescription(GetType(ProgressBar), "Position", New Expressions.ExpressionBindingDescription(New String() {"BeforePrint"}, 1000, New String(-1) {}))
-        End Sub
+			' Specify an array of the property's inner properties.
+			Dim nestedBindableProperties() As String = Nothing
 
-        Public Sub New()
-            ForeColor = SystemColors.Highlight
-        End Sub
+			' Specify the property's category in the property grid's "Expressions" tab.
+			' The empty string corresponds to the root category.
+			Dim scopeName As String = ""
 
-        ' Define the MaxValue property.
-        <DefaultValue(100)>
-        <XtraSerializableProperty>
-        Public Property MaxValue As Single
-            Get
-                Return maxVal
-            End Get
+			' Create and set a description for the "Position" property.
+			Dim description As New ExpressionBindingDescription(eventNames, position_Renamed, nestedBindableProperties, scopeName)
 
-            Set(ByVal value As Single)
-                If value <= 0 Then Return
-                maxVal = value
-            End Set
-        End Property
+			ExpressionBindingDescriptor.SetPropertyDescription(GetType(ProgressBar), nameof(Position), description)
+		End Sub
 
-        ' Define the Position property. 
-        <DefaultValue(0), Bindable(True)>
-        <XtraSerializableProperty>
-        Public Property Position As Single
-            Get
-                Return pos
-            End Get
+		Private position_Renamed As Single = 0
 
-            Set(ByVal value As Single)
-                If value < 0 OrElse value > maxVal Then Return
-                pos = value
-            End Set
-        End Property
+		Private maxValue_Renamed As Single = 100
 
-        ' Override the XRControl.CreateBrick method.
-        Protected Overrides Function CreateBrick(ByVal childrenBricks As VisualBrick()) As VisualBrick
-            ' Use this code to make the progress bar control 
-            ' always represented as a Panel brick.
-            Return New PanelBrick(Me)
-        End Function
+		Public Sub New()
+			Me.ForeColor = SystemColors.Highlight
+		End Sub
 
-        ' Override the XRControl.PutStateToBrick method.
-        Protected Overrides Sub PutStateToBrick(ByVal brick As VisualBrick, ByVal ps As PrintingSystemBase)
-            ' Call the PutStateToBrick method of the base class.
-            MyBase.PutStateToBrick(brick, ps)
-            ' Get the Panel brick which represents the current progress bar control.
-            Dim panel As PanelBrick = CType(brick, PanelBrick)
-            ' Create a new VisualBrick to be inserted into the panel brick.
-            Dim progressBar As VisualBrick = New VisualBrick(Me)
-            ' Hide borders.
-            progressBar.Sides = BorderSide.None
-            ' Set the foreground color to fill the completed area of a progress bar.
-            progressBar.BackColor = panel.Style.ForeColor
-            ' Calculate the rectangle to be filled by the foreground color.
-            progressBar.Rect = New RectangleF(0, 0, panel.Rect.Width * (Position / MaxValue), panel.Rect.Height)
-            ' Add the VisualBrick to the panel.
-            panel.Bricks.Add(progressBar)
-        End Sub
-    End Class
+		<DefaultValue(100), Description("The maximum value of the bar position."), DisplayName("Max Value"), Category("Parameters"), XtraSerializableProperty>
+		Public Property MaxValue() As Single
+			Get
+				Return Me.maxValue_Renamed
+			End Get
+			Set(ByVal value As Single)
+				If value <= 0 Then
+					Return
+				End If
+				Me.maxValue_Renamed = value
+			End Set
+		End Property
+
+		<DefaultValue(0), Description("The current bar position."), DisplayName("Position"), Category("Parameters"), XtraSerializableProperty>
+		Public Property Position() As Single
+			Get
+				Return Me.position_Renamed
+			End Get
+			Set(ByVal value As Single)
+				If value < 0 OrElse value > maxValue_Renamed Then
+					Return
+				End If
+				Me.position_Renamed = value
+			End Set
+		End Property
+
+'        
+'            You can use two bricks to construct a progress bar. The "VisualBrick"
+'            corresponds to a rectangle bar, the "PanelBrick" serves as a container
+'            for this bar.
+'        
+
+		Protected Overrides Function CreateBrick(ByVal childrenBricks() As VisualBrick) As VisualBrick
+			' Create and return a panel brick.
+			Return New PanelBrick(Me)
+		End Function
+
+		Protected Overrides Sub PutStateToBrick(ByVal brick As VisualBrick, ByVal ps As PrintingSystemBase)
+			MyBase.PutStateToBrick(brick, ps)
+
+			' Cast the "brick" variable to the "PanelBrick" type (the type of a brick
+			' created in the "CreateBrick" method). 
+			Dim panel As PanelBrick = CType(brick, PanelBrick)
+
+			' Create a new visual brick to represent a bar.
+			Dim progressBar As New VisualBrick(Me)
+
+			' Hide the brick's borders.
+			progressBar.Sides = BorderSide.None
+
+			' Set the foreground color for the bar.
+			progressBar.BackColor = panel.Style.ForeColor
+
+			' Calculate the width of the progress bar's filled area.
+			Dim filledAreaWidth As Single = panel.Rect.Width * (Position / MaxValue)
+
+			' Create a rectangle to be filled by the foreground color.
+			progressBar.Rect = New RectangleF(0, 0, filledAreaWidth, panel.Rect.Height)
+
+			' Add the visual brick to the panel brick.
+			panel.Bricks.Add(progressBar)
+		End Sub
+	End Class
 End Namespace
-'#End Region  ' #Code
+#End Region ' #Code

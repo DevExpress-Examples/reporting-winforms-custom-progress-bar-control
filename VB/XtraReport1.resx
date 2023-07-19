@@ -117,4 +117,51 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="jsonDataSource1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="customJsonSource1.Json" xml:space="preserve">
+    <value>[
+    {
+        "Country": "Russian Federation",
+        "Area": 17075.4
+    },
+    {
+        "Country": "Canada",
+        "Area": 9970.6
+    },
+    {
+        "Country": "United States",
+        "Area": 9629.1
+    },
+    {
+        "Country": "China",
+        "Area": 9598.1
+    },
+    {
+        "Country": "Brazil",
+        "Area": 8514.9
+    },
+    {
+        "Country": "Australia",
+        "Area": 7741.2
+    },
+    {
+        "Country": "India",
+        "Area": 3166.4
+    },
+    {
+        "Country": "Argentina",
+        "Area": 2780.4
+    },
+    {
+        "Country": "Kazakhstan",
+        "Area": 2724.9
+    },
+    {
+        "Country": "Algeria",
+        "Area": 2381.7
+    }
+]</value>
+  </data>
 </root>
