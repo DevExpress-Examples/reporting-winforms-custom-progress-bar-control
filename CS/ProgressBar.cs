@@ -1,3 +1,4 @@
+#region #Reference
 using DevExpress.XtraPrinting;
 using DevExpress.XtraReports;
 using DevExpress.XtraReports.UI;
@@ -5,7 +6,9 @@ using System.ComponentModel;
 using System.Drawing;
 using DevExpress.Utils.Serializing;
 using DevExpress.XtraReports.Expressions;
+#endregion #Reference
 
+#region #Code
 namespace WindowsFormsApplication1 {
     [ToolboxItem(true)]
     [DefaultBindableProperty("Position")]
@@ -109,3 +112,4 @@ namespace WindowsFormsApplication1 {
         }
     }
 }
+#endregion #Code
